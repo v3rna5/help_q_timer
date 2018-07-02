@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { v4 } from 'uuid';
-
+import Moment from 'moment';
 
 function NewTicketForm(props) {
   let _names = null
@@ -10,12 +10,12 @@ function NewTicketForm(props) {
 
   function handleNewTicketFormSubmission(event) {
     event.preventDefault();
-    props.onNewTicketCreation({names: _names.value, location: _location.value, issue: _issue.value, id: v4()});
+    props.onNewTicketCreation({names: _names.value, location: _location.value, issue: _issue.value, id: v4(), timeOpen: new Moment()});
     _names.value = '';
     _location.value = '';
     _issue.value = '';
   }
- 
+
   return (
     <div>
       <form onSubmit={handleNewTicketFormSubmission}>
@@ -40,7 +40,7 @@ function NewTicketForm(props) {
 }
 NewTicketForm.propTypes = {
   onNewTicketCreation: PropTypes.func
-} 
+}
 
 
 export default NewTicketForm
